@@ -15,7 +15,7 @@
             </li>
 
             <li>
-                <a href="#sobre" class="menu-link">Sobre</a>
+                <a href="#sobre" class="menu-link">Trajetória</a>
             </li>
 
             <li>
@@ -29,15 +29,51 @@
     </nav>
 
     <main id="inicio" class="cabecalho">
-        <img src="img/1691027628335.jpg" alt="Foto de Ian Salgado" class="foto-perfil">
+
+        <div class="sobre-mim">
+            <div class="texto-esquerda">
+                <h4 class="sobre-titulo">Sobre mim</h4>
+                <div class="sobre-caixa">
+                    <p class="sobre-paragrafo">
+                    Olá, sou estudante de Engenharia de Software pela UNINTER, apaixonado por tecnologia e pelo desenvolvimento de soluções inovadoras e eficientes. Possuo experiência em suporte técnico, infraestrutura de TI e desenvolvimento web, com conhecimentos em Python, HTML, CSS, React, redes, hardware e IoT com Arduino. Estou sempre em busca de novos aprendizados, evolução profissional contínua e oportunidades para aplicar meus conhecimentos, contribuir com equipes e gerar valor por meio da tecnologia.
+                    </p>
+                </div>
+            </div> 
+            
+            <div class="minha-foto">
+                <img src="img/1691027628335.jpg" alt="Foto de Ian Salgado" class="foto-perfil">
+            </div>
+    
+            <div class="texto-direita">
+                <h4 class="sobre-titulo">Meus objetivos</h4>
+                <div class="sobre-caixa">
+                     <p class="sobre-paragrafo">
+                        Meu principal objetivo é construir uma carreira sólida e de excelência como Engenheiro de Software, atuando no desenvolvimento de soluções tecnológicas inovadoras, eficientes e de alto impacto. Busco aprimorar constantemente minhas habilidades técnicas e comportamentais, acompanhando as evoluções do mercado e das novas tecnologias. Almejo participar de projetos desafiadores, contribuir ativamente com equipes de alto desempenho e gerar valor por meio da tecnologia, crescendo profissionalmente e ajudando a transformar realidades por meio da inovação.
+                    </p>
+                </div>
+            </div>    
+        </div>
+        
         <h1>Ian Salgado</h1>
         <p class="cabecalho-sub-titulo">Engenheiro de Software</p>
     </main>
 
     <section id="sobre" class="sobre">
-        <h2 class="sobre-titulo">Sobre Mim</h2>
+        <h2 class="sobre-titulo">Minha trajetória</h2>
         <div class="sobre-caixa">
-            <p class="sobre-paragrafo">Sou estudante de Engenharia de Software pela UNINTER, apaixonado por tecnologia e pelo desenvolvimento de soluções inovadoras e eficientes. Possuo experiência em suporte técnico, infraestrutura de TI e desenvolvimento web, com conhecimentos em Python, HTML, CSS, React, redes, hardware e IoT com Arduino. Estou sempre em busca de novos aprendizados, evolução profissional contínua e oportunidades para aplicar meus conhecimentos, contribuir com equipes e gerar valor por meio da tecnologia.</p>
+            <p class="sobre-paragrafo">
+                Ian Gabriel Silva Salgado | 23 anos | Brasileiro | Solteiro
+                Estudante de Engenharia de Software pela UNINTER, apaixonado por tecnologia e desenvolvimento de soluções inovadoras e eficientes. Possui experiência prática em suporte técnico, infraestrutura de TI, desenvolvimento web e manutenção de hardware, com conhecimentos em Python, HTML, CSS, React, redes e IoT com Arduino.
+            </p>
+
+            <p class="sobre-paragrafo">
+                Ao longo de sua trajetória, atuou em diversas funções, incluindo assistente de TI, operador de produção, auxiliar  administrativo e mecânico de manutenção, demonstrando versatilidade, capacidade de adaptação e comprometimento em diferentes contextos profissionais.
+            </p>
+
+            <p class="sobre-paragrafo">
+                Buscando constantemente aprendizado e evolução, tem interesse em oportunidades que permitam aplicar seus conhecimentos, contribuir com equipes multidisciplinares e gerar valor por meio da tecnologia. Possui formação complementar em informática, redes, hardware, desenvolvimento web e projetos de IoT, além de nível intermediário em inglês e básico em espanhol.
+            </p>
+
         </div>    
     </section>
 
@@ -45,12 +81,46 @@
         <h2 class="projetos-titulo">Meus Projetos</h2>
         <div class="projetos-caixa">
 
-            <div class="projetos-card">
+            <div class="projetos-card" id="cardCalculadora">
                 <img src="" alt="" class="projetos-imagem">
                 <div class="caixa-texto-projeto">
-                    <h3 class="info-projetos">Sistema de Gerenciamento de Tarefas</h3>
-                    <p class="paragrafo-projeto">Desenvolvi um sistema web para gerenciamento de tarefas utilizando React para o front-end e Node.js para o back-end. O sistema permite aos usuários criar, editar e excluir tarefas, além de organizar suas atividades diárias de forma eficiente.</p>
+                    <h3 class="info-projetos">Calculadora</h3>
+                    <p class="paragrafo-projeto">Desenvolvi uma calculadora em um sistema web completamente funcional.</p>
                 </div>               
+            </div>
+
+            <div class="modal" id="modalCalculadora">
+                <div class="modal-content animate">
+                    <span class="close" id="fecharModal">&times;</span>
+                    <div class="calculator">
+                        <input type="text" class="display" id="display" disabled>
+                        <div class="buttons">
+                            <button onclick="clearDisplay()">C</button>
+                            <button onclick="deleteLast()">⌫</button>
+                            <button onclick="appendValue('%')">%</button>
+                            <button onclick="appendValue('/')">÷</button>
+
+                            <button onclick="appendValue('7')">7</button>
+                            <button onclick="appendValue('8')">8</button>
+                            <button onclick="appendValue('9')">9</button>
+                            <button onclick="appendValue('*')">×</button>
+
+                            <button onclick="appendValue('4')">4</button>
+                            <button onclick="appendValue('5')">5</button>
+                            <button onclick="appendValue('6')">6</button>
+                            <button onclick="appendValue('-')">−</button>
+
+                            <button onclick="appendValue('1')">1</button>
+                            <button onclick="appendValue('2')">2</button>
+                            <button onclick="appendValue('3')">3</button>
+                            <button onclick="appendValue('+')">+</button>
+
+                            <button onclick="appendValue('0')">0</button>
+                            <button onclick="appendValue('.')">.</button>
+                            <button onclick="calculate()" class="equals">=</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="projetos-card">
@@ -96,7 +166,7 @@
                 const texto = `Olá! Me chamo ${nome}, ${mensagem}`
                 const msgFormatada = encodeURIComponent(texto)
                 
-                const url = `https://wame.me/${telefone}?text=${mensagemFormatada}`
+                const url = `https://wame.me/${telefone}?text=${msgFormatada}`
 
                 console.log(url)
 

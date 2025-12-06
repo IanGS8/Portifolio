@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automação Residencial com Arduino</title>
+    <link rel="stylesheet" href="stylles.css">
+</head>
+<body class="sobre">
+    <h1 class="sobre-titulo">Automação Residencial com Arduino</h1>
+
+    <div class="sobre-caixa">
+        <h2>1. Componentes necessários</h2>
+        <h3>Hardware</h3>
+        <ul>
+            <li>Arduino UNO, Nano ou ESP32 (recomendado ESP32/ESP8266 — Wi-Fi embutido)</li>
+            <li>Relés 5V (1, 2, 4 ou 8 canais)</li>
+            <li>Sensor de temperatura/humidade DHT11 ou DHT22</li>
+            <li>Lâmpada + tomada/fio para testes</li>
+            <li>Fonte 5V</li>
+            <li>Jumpers</li>
+            <li>Protoboard</li>
+        </ul>
+
+        <h3>Software</h3>
+        <ul>
+            <li>Arduino IDE</li>
+            <li>Blynk (mais fácil)</li>
+            <li>MIT App Inventor</li>
+            <li>ESP RainMaker (se usar ESP32)</li>
+        </ul>
+
+        <hr>
+
+        <h2>2. Estrutura do Projeto</h2>
+        <p>O sistema terá:</p>
+        <ul>
+            <li>✔ Controle de iluminação</li>
+            <li>✔ Monitoramento de temperatura</li>
+            <li>✔ Controle remoto de dispositivos</li>
+            <li>✔ Comunicação Wi-Fi</li>
+        </ul>
+
+        <hr>
+
+        <h2>3. Esquema Elétrico (básico)</h2>
+        <h3>DHT22</h3>
+        <ul>
+            <li>VCC → 3.3V</li>
+            <li>GND → GND</li>
+            <li>DATA → GPIO 4</li>
+        </ul>
+
+        <h3>Relé</h3>
+        <ul>
+            <li>VCC → 5V</li>
+            <li>GND → GND</li>
+            <li>IN1 → GPIO 5</li>
+            <li>IN2 → GPIO 18</li>
+        </ul>
+
+        <p><strong>⚠ Atenção:</strong> A lâmpada AC deve ser usada com segurança. Para testes, use LED 12V.</p>
+
+        <hr>
+
+        <h2>4. Código Completo (ESP32 + Blynk)</h2>
+        <pre>
+#define BLYNK_PRINT Serial
+#include &lt;WiFi.h&gt;
+#include &lt;WiFiClient.h&gt;
+#include &lt;BlynkSimpleEsp32.h&gt;
+#include "DHT.h"
+
+#define DHTPIN 4
+#define DHTTYPE DHT22
+#define rele1 5
+#define rele2 18
+
+char auth[] = "SEU_TOKEN_BLYNK";
+char ssid[] = "SUA_WIFI";
+char pass[] = "SENHA_WIFI";
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(115200);
+  Blynk.begin(auth, ssid, pass);
+
+  pinMode(rele1, OUTPUT);
+  pinMode(rele2, OUTPUT);
+
+  digitalWrite(rele1, HIGH);  
+  digitalWrite(rele2, HIGH);
+
+  dht.begin();
+}
+
+void loop() {
+  Blynk.run();
+
+  float t = dht.readTemperature();
+  float h = dht.readHumidity();
+
+  Blynk.virtualWrite(V1, t);
+  Blynk.virtualWrite(V2, h);
+
+  delay(2000);
+}
+
+BLYNK_WRITE(V3) {
+  int estado = param.asInt();
+  digitalWrite(rele1, !estado);
+}
+
+BLYNK_WRITE(V4) {
+  int estado = param.asInt();
+  digitalWrite(rele2, !estado);
+}
+        </pre>
+
+        <hr>
+
+        <h2>5. Criando o APP no Blynk</h2>
+        <ul>
+            <li>Crie projeto no app Blynk</li>
+            <li>Adicione indicadores (Gauge) para temperatura V1 e umidade V2</li>
+            <li>Adicione botões para relés V3 e V4</li>
+            <li>Copie o Auth Token para o código</li>
+        </ul>
+
+        <hr>
+
+        <h2>6. Possíveis Melhorias</h2>
+        <ul>
+            <li>Controle por voz (Alexa/Google)</li>
+            <li>Automatizar ventilação</li>
+            <li>Sensor de presença PIR</li>
+            <li>Dashboard Web</li>
+            <li>Uso de Firebase</li>
+            <li>Monitoramento de energia (PZEM-004T)</li>
+        </ul>
+    </div>
+
+    <br><br>
+    <a href="index.html" class="botao-form">Voltar</a>
+</body>
+</html>
